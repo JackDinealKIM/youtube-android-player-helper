@@ -32,6 +32,7 @@ Or Maven:
 How do I use YTPlayer?
 -------------------
 Simple use cases will look something like this:
+* JAVA
 
 ```java
 // For a simple view:
@@ -119,7 +120,15 @@ public class MainActivity extends AppCompatActivity {
 }
 
 ```
+* XML
 
+```xml
+    <com.jaedongchicken.ytplayer.YoutubePlayerView
+        android:id="@+id/youtubePlayerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+```
 
 Author
 ------
