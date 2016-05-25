@@ -132,11 +132,10 @@ public class MainActivity extends AppCompatActivity {
 
 Author
 ------
-Jaedong Kim - @JackDinealKIM on GitHub
+Jaedong Kim - @JackDinealKIM on GitHub, mashiaro@gmail.com
 
 License
 -------
-##License 
 ```code
 Copyright 2016 JD Kim
 
