@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.novoda.bintray-release' // must be applied after your artifact generating plugin (eg. java / com.android.library)
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -16,10 +18,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
+
+}
+
+publish {
+    userOrg = 'mashiaro'
+    groupId = 'com.jaedongchicken'
+    artifactId = 'ytplayer'
+    publishVersion = '1.0.0'
+    desc = 'Helper library for Android developers looking to add YouTube video playback in their applications via the iframe player in WebView'
+    website = 'https://github.com/JackDinealKIM/youtube-android-player-helper'
 }
