@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/youtube-android-player-helper.iml" filepath="$PROJECT_DIR$/youtube-android-player-helper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ytplayer/ytplayer.iml" filepath="$PROJECT_DIR$/ytplayer/ytplayer.iml" />
     </modules>
   </component>
 </project>
