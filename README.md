@@ -8,8 +8,8 @@ Download
 use Gradle:
 
 ```gradle
-repositories {
-  mavenCentral() // jcenter() works as well because it pulls from Maven Central
+ repositories {
+  jcenter() // mavenCentral() may will work as well?
 }
 
 dependencies {
@@ -76,11 +76,11 @@ Simple use cases will look something like this:
             }
 
             @Override
-            public void onError(String error) {            }
+            public void onError(String error) {
+            }
 
             @Override
             public void onApiChange(String arg) {
-
             }
 
             @Override
