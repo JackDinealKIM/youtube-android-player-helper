@@ -32,94 +32,6 @@ Or Maven:
 How do I use YTPlayer?
 -------------------
 Simple use cases will look something like this:
-* JAVA
-
-```java
-// For a simple view:
-public class MainActivity extends AppCompatActivity {
-
-    private TextView currentSec;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        currentSec = (TextView) findViewById(R.id.currentSec);
-
-        YoutubePlayerView youtubePlayerView = (YoutubePlayerView) findViewById(R.id.youtubePlayerView);
-        youtubePlayerView.setAutoPlayerHeight(this);
-        youtubePlayerView.initialize("YouTubeID", new YoutubePlayerView.YouTubeListener() {
-
-            @Override
-            public void onReady() {
-                JLog.d("onReady()");
-            }
-
-            @Override
-            public void onStateChange(YoutubePlayerView.STATE state) {
-                switch (state) {
-                    case UNSTARTED:
-                        JLog.d("onStateChange(UNSTARTED)");
-                        break;
-                    case ENDED:
-                        JLog.d("onStateChange(ENDED)");
-                        break;
-                    case PLAYING:
-                        JLog.d("onStateChange(PLAYING)");
-                        break;
-                    case PAUSED:
-                        JLog.d("onStateChange(PAUSED)");
-                        break;
-                    case BUFFERING:
-                        JLog.d("onStateChange(BUFFERING)");
-                        break;
-                    case CUED:
-                        JLog.d("onStateChange(CUED)");
-                        break;
-                }
-            }
-
-            @Override
-            public void onPlaybackQualityChange(String arg) {
-                JLog.d("onPlaybackQualityChange(" + arg + ")");
-            }
-
-            @Override
-            public void onPlaybackRateChange(String arg) {
-                JLog.d("onPlaybackRateChange(" + arg + ")");
-            }
-
-            @Override
-            public void onError(String error) {
-                JLog.e("onApiChange(" + error + ")");
-            }
-
-            @Override
-            public void onApiChange(String arg) {
-                JLog.d("onApiChange(" + arg + ")");
-            }
-
-            @Override
-            public void onCurrentSecond(double second) {
-                JLog.d("onCurrentSecond(" + second + ")");
-                currentSec.setText(second + " sec.");
-            }
-
-            @Override
-            public void onDuration(double duration) {
-                JLog.d("onDuration(" + duration + ")");
-            }
-
-            @Override
-            public void logs(String log) {
-                JLog.d("logs(" + log + ")");
-            }
-        });
-    }
-}
-
-```
 * XML
 
 ```xml
@@ -130,9 +42,79 @@ public class MainActivity extends AppCompatActivity {
 
 ```
 
+* JAVA
+
+```java
+        // get id from XML
+        YoutubePlayerView youtubePlayerView = (YoutubePlayerView) findViewById(R.id.youtubePlayerView);
+        // make auto height of youtube. if you want to use 'wrap_content'
+        youtubePlayerView.setAutoPlayerHeight(this);
+        // initialize YoutubePlayerCallBackListener and VideoID
+        youtubePlayerView.initialize("YOUTUBE_ID", new YoutubePlayerView.YouTubeListener() {
+
+            @Override
+            public void onReady() {
+                // when player is ready.
+            }
+
+            @Override
+            public void onStateChange(YoutubePlayerView.STATE state) {
+                /**
+                 * YoutubePlayerView.STATE
+                 *
+                 * UNSTARTED, ENDED, PLAYING, PAUSED, BUFFERING, CUED, NONE
+                 *
+                 */
+            }
+
+            @Override
+            public void onPlaybackQualityChange(String arg) {
+            }
+
+            @Override
+            public void onPlaybackRateChange(String arg) {
+            }
+
+            @Override
+            public void onError(String error) {            }
+
+            @Override
+            public void onApiChange(String arg) {
+
+            }
+
+            @Override
+            public void onCurrentSecond(double second) {
+                // currentTime callback
+            }
+
+            @Override
+            public void onDuration(double duration) {
+                // total duration
+            }
+
+            @Override
+            public void logs(String log) {
+                // javascript debug log. you don't need to use it.
+            }
+        });
+
+
+        // psuse video
+        youtubePlayerView.pause();
+        // play video when it's ready
+        youtubePlayerView.play();
+```
+
+
 Author
 ------
 Jaedong Kim - @JackDinealKIM on GitHub, mashiaro@gmail.com
+
+
+Disclaimer
+---------
+This is not an official Google product.
 
 License
 -------
@@ -151,7 +133,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.```
 
-Disclaimer
----------
-This is not an official Google product.
+
 
