@@ -26,6 +26,7 @@ public class YoutubePlayerView extends WebView {
     private QualsonBridge bridge = new QualsonBridge();
 
     private YouTubeListener youTubeListener;
+    private String backgroundColor = "#000000";
 
     public YoutubePlayerView(Context context) {
         super(context);
@@ -70,6 +71,10 @@ public class YoutubePlayerView extends WebView {
         this.setWebChromeClient(new WebChromeClient());
     }
 
+    public void setWhiteBackgroundColor() {
+        backgroundColor = "#ffffff";
+    }
+
     public void setAutoPlayerHeight(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -92,11 +97,6 @@ public class YoutubePlayerView extends WebView {
     public void play() {
         JLog.d("play");
         this.loadUrl("javascript:onVideoPlay()");
-    }
-
-    public void hideControls() {
-        JLog.d("hideControls");
-        this.loadUrl("javascript:onHideControls()");
     }
 
     public void onLoadVideo(String videoId, float mil) {
@@ -296,7 +296,7 @@ public class YoutubePlayerView extends WebView {
 
                 in.close();
 
-                String html = sb.toString().replace("[VIDEO_ID]", videoId);
+                String html = sb.toString().replace("[VIDEO_ID]", videoId).replace("[BG_COLOR]", backgroundColor);
                 return html;
             }
         } catch (Exception e) {
