@@ -14,11 +14,11 @@ use Gradle:
 
 ```gradle
  repositories {
-  jcenter() // mavenCentral() may will work as well?
+  jcenter()
 }
 
 dependencies {
-  compile 'com.jaedongchicken:ytplayer:1.0.0'
+  compile 'com.jaedongchicken:ytplayer:1.1.0'
 }
 ```
 
@@ -28,7 +28,7 @@ Or Maven:
 <dependency>
   <groupId>com.jaedongchicken</groupId>
   <artifactId>ytplayer</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -36,6 +36,8 @@ Or Maven:
 
 How do I use YTPlayer?
 -------------------
+You can see more detail from [MainActivity.java][1].
+
 Simple use cases will look something like this:
 * XML
 
@@ -136,7 +138,10 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
-limitations under the License.```
+limitations under the License.
+```
+
+[1]: https://github.com/JackDinealKIM/youtube-android-player-helper/blob/master/app/src/main/java/com/jaedongchicken/ytplayer_sample/MainActivity.java
 
 
 
