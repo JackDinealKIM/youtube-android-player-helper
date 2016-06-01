@@ -18,7 +18,7 @@ use Gradle:
 }
 
 dependencies {
-  compile 'com.jaedongchicken:ytplayer:1.1.0'
+  compile 'com.jaedongchicken:ytplayer:1.2.0'
 }
 ```
 
@@ -28,7 +28,7 @@ Or Maven:
 <dependency>
   <groupId>com.jaedongchicken</groupId>
   <artifactId>ytplayer</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -54,7 +54,17 @@ Simple use cases will look something like this:
 ```java
         // get id from XML
         YoutubePlayerView youtubePlayerView = (YoutubePlayerView) findViewById(R.id.youtubePlayerView);
-        // make auto height of youtube. if you want to use 'wrap_content'
+       
+         // Control values
+         // see more # https://developers.google.com/youtube/player_parameters?hl=en
+        YTParams params = new YTParams();
+        // params.setControls(0); // hide control
+        
+         // initialize YoutubePlayerCallBackListener with Params and VideoID
+        // youtubePlayerView.initialize("WCchr07kLPE", params, new YoutubePlayerView.YouTubeListener())
+
+
+       // make auto height of youtube. if you want to use 'wrap_content'
         youtubePlayerView.setAutoPlayerHeight(this);
         // initialize YoutubePlayerCallBackListener and VideoID
         youtubePlayerView.initialize("YOUTUBE_ID", new YoutubePlayerView.YouTubeListener() {
@@ -112,6 +122,12 @@ Simple use cases will look something like this:
         // play video when it's ready
         youtubePlayerView.play();
 ```
+
+
+Updated
+------
+v 1.2.0 - added YTParams class.
+v 1.1.0 - added setWhiteBackgroundColor() method.
 
 
 Author
