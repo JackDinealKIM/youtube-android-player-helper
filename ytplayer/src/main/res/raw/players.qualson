@@ -36,14 +36,14 @@
         'onApiChange': onPlayerApiChange
       },
       playerVars: {
-        'autoplay': 0,
-        'autohide':1,
-        'rel': 0,
-        'showinfo': 0,
-        'enablejsapi': 1,
-        'disablekb': 1,
-        'cc_lang_pref': 'en',
-        'controls': 1,
+        'autoplay': [AUTO_PLAY],
+        'autohide':[AUTO_HIDE],
+        'rel': [REL],
+        'showinfo': [SHOW_INFO],
+        'enablejsapi': [ENABLE_JS_API],
+        'disablekb': [DISABLE_KB],
+        'cc_lang_pref': '[CC_LANG_PREF]',
+        'controls': [CONTROLS],
 		'origin' : 'http://www.youtube.com'
       }
     });

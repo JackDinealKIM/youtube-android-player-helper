@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.jaedongchicken.ytplayer.JLog;
 import com.jaedongchicken.ytplayer.YoutubePlayerView;
+import com.jaedongchicken.ytplayer.model.YTParams;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
 
         // if you want to change white backgrond, #default is black.
         // youtubePlayerView.setWhiteBackgroundColor();
+
+        // Control values : see more # https://developers.google.com/youtube/player_parameters?hl=en
+        YTParams params = new YTParams();
+        params.setControls(0);
+
+        // initialize YoutubePlayerCallBackListener with Params and VideoID
+        // youtubePlayerView.initialize("WCchr07kLPE", params, new YoutubePlayerView.YouTubeListener())
 
         // initialize YoutubePlayerCallBackListener and VideoID
         youtubePlayerView.initialize("WCchr07kLPE", new YoutubePlayerView.YouTubeListener() {
@@ -111,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            float sec = (float)((double) msg.obj);
+            // you can cast with float that I recommend.
+            double sec = (double) msg.obj;
             currentSec.setText(String.valueOf(sec));
         }
     };

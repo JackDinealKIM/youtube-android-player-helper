@@ -15,6 +15,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jaedongchicken.ytplayer.model.YTParams;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,6 +26,8 @@ import java.lang.reflect.Field;
 public class YoutubePlayerView extends WebView {
 
     private QualsonBridge bridge = new QualsonBridge();
+
+    private YTParams params = new YTParams();
 
     private YouTubeListener youTubeListener;
     private String backgroundColor = "#000000";
@@ -69,6 +73,13 @@ public class YoutubePlayerView extends WebView {
         }
 
         this.setWebChromeClient(new WebChromeClient());
+    }
+
+    public void initialize(String videoId, YTParams params, YouTubeListener youTubeListener) {
+        if(params != null) {
+            this.params = params;
+        }
+        initialize(videoId, youTubeListener);
     }
 
     public void setWhiteBackgroundColor() {
@@ -297,6 +308,14 @@ public class YoutubePlayerView extends WebView {
                 in.close();
 
                 String html = sb.toString().replace("[VIDEO_ID]", videoId).replace("[BG_COLOR]", backgroundColor);
+                html = html.replace("[AUTO_PLAY]", String.valueOf(params.getAutoplay()))
+                        .replace("[AUTO_HIDE]", String.valueOf(params.getAutohide()))
+                        .replace("[REL]", String.valueOf(params.getRel()))
+                        .replace("[SHOW_INFO]", String.valueOf(params.getShowinfo()))
+                        .replace("[ENABLE_JS_API]", String.valueOf(params.getEnablejsapi()))
+                        .replace("[DISABLE_KB]", String.valueOf(params.getDisablekb()))
+                        .replace("[CC_LANG_PREF]", String.valueOf(params.getCc_lang_pref()))
+                        .replace("[CONTROLS]", String.valueOf(params.getControls()));
                 return html;
             }
         } catch (Exception e) {
