@@ -81,6 +81,13 @@ public class YoutubePlayerView extends WebView {
         }
         initialize(videoId, youTubeListener);
     }
+    public void initializeWithUrl(String videoUrl, YTParams params, YouTubeListener youTubeListener) {
+        if(params != null) {
+            this.params = params;
+        }
+        String videoId = videoUrl.substring(videoUrl.indexOf('=')+1);
+        initialize(videoId, youTubeListener);
+    }
 
     public void setWhiteBackgroundColor() {
         backgroundColor = "#ffffff";
