@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.jaedongchicken.ytplayer.JLog;
 import com.jaedongchicken.ytplayer.YoutubePlayerView;
+import com.jaedongchicken.ytplayer.model.PlaybackQuality;
 import com.jaedongchicken.ytplayer.model.YTParams;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,13 +33,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Control values : see more # https://developers.google.com/youtube/player_parameters?hl=en
         YTParams params = new YTParams();
-        params.setControls(0);
+        // params.setControls(0);
+        // params.setAutoplay(1);
+        params.setVolume(80);
+        params.setPlaybackQuality(PlaybackQuality.small);
 
         // initialize YoutubePlayerCallBackListener with Params and VideoID
         // youtubePlayerView.initialize("WCchr07kLPE", params, new YoutubePlayerView.YouTubeListener())
 
         // initialize YoutubePlayerCallBackListener and VideoID
-        youtubePlayerView.initialize("WCchr07kLPE", new YoutubePlayerView.YouTubeListener() {
+        youtubePlayerView.initialize("BzYnNdJhZQw", params, new YoutubePlayerView.YouTubeListener() {
 
             @Override
             public void onReady() {
