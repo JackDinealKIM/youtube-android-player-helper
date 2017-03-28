@@ -12,6 +12,8 @@ public class YTParams {
     private int disablekb = 1;
     private String cc_lang_pref = "en";
     private int controls = 1;
+    private int volume = 100;
+    private PlaybackQuality playbackQuality;
 
     public int getAutoplay() {
         return autoplay;
@@ -76,4 +78,23 @@ public class YTParams {
     public void setControls(int controls) {
         this.controls = controls;
     }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public YTParams setVolume(int volume) {
+        this.volume = volume;
+        return this;
+    }
+
+    public PlaybackQuality getPlaybackQuality() {
+        return playbackQuality;
+    }
+
+    public YTParams setPlaybackQuality(PlaybackQuality playbackQuality) {
+        this.playbackQuality = playbackQuality;
+        return this;
+    }
+
 }

@@ -15,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jaedongchicken.ytplayer.model.PlaybackQuality;
 import com.jaedongchicken.ytplayer.model.YTParams;
 
 import java.io.BufferedReader;
@@ -81,6 +82,7 @@ public class YoutubePlayerView extends WebView {
         }
         initialize(videoId, youTubeListener);
     }
+
     public void initializeWithUrl(String videoUrl, YTParams params, YouTubeListener youTubeListener) {
         if(params != null) {
             this.params = params;
@@ -315,6 +317,7 @@ public class YoutubePlayerView extends WebView {
                 in.close();
 
                 String html = sb.toString().replace("[VIDEO_ID]", videoId).replace("[BG_COLOR]", backgroundColor);
+                PlaybackQuality playbackQuality = params.getPlaybackQuality();
                 html = html.replace("[AUTO_PLAY]", String.valueOf(params.getAutoplay()))
                         .replace("[AUTO_HIDE]", String.valueOf(params.getAutohide()))
                         .replace("[REL]", String.valueOf(params.getRel()))
@@ -322,7 +325,9 @@ public class YoutubePlayerView extends WebView {
                         .replace("[ENABLE_JS_API]", String.valueOf(params.getEnablejsapi()))
                         .replace("[DISABLE_KB]", String.valueOf(params.getDisablekb()))
                         .replace("[CC_LANG_PREF]", String.valueOf(params.getCc_lang_pref()))
-                        .replace("[CONTROLS]", String.valueOf(params.getControls()));
+                        .replace("[CONTROLS]", String.valueOf(params.getControls()))
+                        .replace("[AUDIO_VOLUME]", String.valueOf(params.getVolume()))
+                        .replace("[PLAYBACK_QUALITY]", playbackQuality == null ? String.valueOf("default") : playbackQuality.name());
                 return html;
             }
         } catch (Exception e) {

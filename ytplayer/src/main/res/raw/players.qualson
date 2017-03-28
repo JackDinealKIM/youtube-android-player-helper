@@ -55,6 +55,7 @@
     sendDuration();
     player.setOption("captions", "track", {"languageCode": "es"});
     player.unloadModule("captions");
+    player.setVolume([AUDIO_VOLUME]);
   }
 
   var timerId = 0;
@@ -152,6 +153,7 @@
 
   function onVideoPlay(){
     player.playVideo();
+    player.setVolume([AUDIO_VOLUME]);
   }
 
   function onHideControls(){
@@ -165,8 +167,8 @@
 
   function cueVideo(videoId){
     setLog(videoId);
-    player.cueVideoById(videoId, 0, "default");
-    player.setVolume(100)
+    player.cueVideoById(videoId, 0, "[PLAYBACK_QUALITY]");
+    player.setVolume([AUDIO_VOLUME]);
   }
 </script>
 </html>
