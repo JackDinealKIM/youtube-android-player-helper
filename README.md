@@ -18,7 +18,7 @@ use Gradle:
 }
 
 dependencies {
-  compile 'com.jaedongchicken:ytplayer:1.2.0'
+  compile 'com.jaedongchicken:ytplayer:1.3.0'
 }
 ```
 
@@ -28,7 +28,7 @@ Or Maven:
 <dependency>
   <groupId>com.jaedongchicken</groupId>
   <artifactId>ytplayer</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -59,6 +59,9 @@ Simple use cases will look something like this:
          // see more # https://developers.google.com/youtube/player_parameters?hl=en
         YTParams params = new YTParams();
         // params.setControls(0); // hide control
+        // params.setVolume(100); // volume control
+        // params.setPlaybackQuality(PlaybackQuality.small); // video quality control
+
         
          // initialize YoutubePlayerCallBackListener with Params and VideoID
         // youtubePlayerView.initialize("WCchr07kLPE", params, new YoutubePlayerView.YouTubeListener())
