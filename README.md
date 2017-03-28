@@ -126,9 +126,11 @@ Simple use cases will look something like this:
 
 Updated
 ------
-v 1.2.0 - added YTParams class.
+```
+v 1.3.0 - added AudioVolume, VideoQualoty in YTParams class.
+v 1.2.0 - added YTParams class, many youtube functions defined.
 v 1.1.0 - added setWhiteBackgroundColor() method.
-
+```
 
 Author
 ------
