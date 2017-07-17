@@ -110,7 +110,7 @@ public class YoutubePlayerView extends WebView {
         }
         isCustomDomain = true;
         String webCustomUrl = customURL.concat(videoId);
-        if (customURL.startsWith("http") || customURL.startsWith("https")) {
+        if (videoId.startsWith("http") || videoId.startsWith("https")) {
             webCustomUrl = videoId;
         }
         initialize(webCustomUrl.concat(params.toString()), youTubeListener);

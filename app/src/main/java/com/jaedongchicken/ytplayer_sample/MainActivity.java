@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // youtubePlayerView.initializeWithCustomURL("p1Zt47V3pPw" or "http://jaedong.net/youtube/p1Zt47V3pPw", params, new YoutubePlayerView.YouTubeListener())
 
         // initialize YoutubePlayerCallBackListener and VideoID
-        youtubePlayerView.initialize("dxWvtMOGAhw", params, new YoutubePlayerView.YouTubeListener() {
+        youtubePlayerView.initialize("PFA-RmV_wG0", params, new YoutubePlayerView.YouTubeListener() {
 
             @Override
             public void onReady() {
