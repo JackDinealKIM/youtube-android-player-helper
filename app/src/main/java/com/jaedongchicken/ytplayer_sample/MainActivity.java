@@ -1,10 +1,9 @@
 package com.jaedongchicken.ytplayer_sample;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jaedongchicken.ytplayer.JLog;
 import com.jaedongchicken.ytplayer.YoutubePlayerView;
@@ -35,14 +34,20 @@ public class MainActivity extends AppCompatActivity {
         YTParams params = new YTParams();
         // params.setControls(0);
         // params.setAutoplay(1);
-        params.setVolume(80);
+        params.setVolume(100);
         params.setPlaybackQuality(PlaybackQuality.small);
 
-        // initialize YoutubePlayerCallBackListener with Params and VideoID
-        // youtubePlayerView.initialize("WCchr07kLPE", params, new YoutubePlayerView.YouTubeListener())
+        currentSec.setText(String.valueOf(0));
+
+        // initialize YoutubePlayerCallBackListener with Params and Full Video URL
+        // youtubePlayerView.initializeWithUrl("https://www.youtube.com/watch?v=dxWvtMOGAhw", params, new YoutubePlayerView.YouTubeListener())
+
+        // initialize YoutubePlayerCallBackListener with Params and Full Video URL
+        // To Use - avoid UMG block!!!! but you'd better make own your server for your real service.
+        // youtubePlayerView.initializeWithCustomURL("p1Zt47V3pPw" or "http://jaedong.net/youtube/p1Zt47V3pPw", params, new YoutubePlayerView.YouTubeListener())
 
         // initialize YoutubePlayerCallBackListener and VideoID
-        youtubePlayerView.initialize("BzYnNdJhZQw", params, new YoutubePlayerView.YouTubeListener() {
+        youtubePlayerView.initialize("p1Zt47V3pPw", params, new YoutubePlayerView.YouTubeListener() {
 
             @Override
             public void onReady() {
@@ -64,36 +69,37 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPlaybackQualityChange(String arg) {
-                JLog.i("onPlaybackQualityChange(" + arg + ")");
+                String message = "onPlaybackQualityChange(" + arg + ")";
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onPlaybackRateChange(String arg) {
-                JLog.i("onPlaybackRateChange(" + arg + ")");
+                String message = "onPlaybackRateChange(" + arg + ")";
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(String arg) {
-                JLog.e("onError(" + arg + ")");
+                String message = "onError(" + arg + ")";
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onApiChange(String arg) {
-                JLog.i("onApiChange(" + arg + ")");
+                String message = "onApiChange(" + arg + ")";
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onCurrentSecond(double second) {
-                // currentTime callback
-                Message msg = new Message();
-                msg.obj = second;
-                handler.sendMessage(msg);
+                currentSec.setText(String.valueOf(second));
             }
 
             @Override
             public void onDuration(double duration) {
-                // total duration
-                JLog.i("onDuration(" + duration + ")");
+                String message = "onDuration(" + duration + ")";
+                JLog.i(message);
             }
 
             @Override
@@ -119,15 +125,6 @@ public class MainActivity extends AppCompatActivity {
         // seek to 20 secs
         // youtubePlayerView.seekToMillis(20);
     }
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            // you can cast with float that I recommend.
-            double sec = (double) msg.obj;
-            currentSec.setText(String.valueOf(sec));
-        }
-    };
 
     @Override
     protected void onDestroy() {

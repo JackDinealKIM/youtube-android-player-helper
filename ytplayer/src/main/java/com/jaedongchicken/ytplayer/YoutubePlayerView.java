@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -32,14 +34,21 @@ public class YoutubePlayerView extends WebView {
 
     private YouTubeListener youTubeListener;
     private String backgroundColor = "#000000";
+    private final String customURL = "http://jaedong.net/youtube/";
+
+    private Context context;
+
+    private boolean isCustomDomain = false;
 
     public YoutubePlayerView(Context context) {
         super(context);
+        this.context = context;
         setWebViewClient(new MyWebViewClient((Activity) context));
     }
 
     public YoutubePlayerView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         setWebViewClient(new MyWebViewClient((Activity) context));
     }
 
@@ -60,8 +69,8 @@ public class YoutubePlayerView extends WebView {
         this.setLayerType(View.LAYER_TYPE_NONE, null);
         this.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         this.addJavascriptInterface(bridge, "QualsonInterface");
-        this.loadDataWithBaseURL("http://www.youtube.com", getVideoHTML(videoId), "text/html", "utf-8", null);
         this.setLongClickable(true);
+        this.setWebChromeClient(new WebChromeClient());
         this.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -73,7 +82,11 @@ public class YoutubePlayerView extends WebView {
             setWebContentsDebuggingEnabled(true);
         }
 
-        this.setWebChromeClient(new WebChromeClient());
+        if (isCustomDomain) {
+            this.loadUrl(videoId);
+        } else {
+            this.loadDataWithBaseURL("http://www.youtube.com", getVideoHTML(videoId), "text/html", "utf-8", null);
+        }
     }
 
     public void initialize(String videoId, YTParams params, YouTubeListener youTubeListener) {
@@ -91,6 +104,18 @@ public class YoutubePlayerView extends WebView {
         initialize(videoId, youTubeListener);
     }
 
+    public void initializeWithCustomURL(String videoId, YTParams params, YouTubeListener youTubeListener) {
+        if (params != null) {
+            this.params = params;
+        }
+        isCustomDomain = true;
+        String webCustomUrl = customURL.concat(videoId);
+        if (customURL.startsWith("http") || customURL.startsWith("https")) {
+            webCustomUrl = videoId;
+        }
+        initialize(webCustomUrl.concat(params.toString()), youTubeListener);
+    }
+
     public void setWhiteBackgroundColor() {
         backgroundColor = "#ffffff";
     }
@@ -99,6 +124,10 @@ public class YoutubePlayerView extends WebView {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         this.getLayoutParams().height = (int) (displayMetrics.widthPixels * 0.5625);
+    }
+
+    public void setAutoPlayerHeight() {
+        setAutoPlayerHeight(context);
     }
 
     /**
@@ -127,6 +156,15 @@ public class YoutubePlayerView extends WebView {
     public void onCueVideo(String videoId) {
         JLog.d("onCueVideo : " + videoId);
         this.loadUrl("javascript:cueVideo('" + videoId + "')");
+    }
+
+    public void playFullscreen() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        this.getLayoutParams().height = (int) (displayMetrics.widthPixels * 0.5625);
+
+        JLog.d("playFullscreen");
+        this.loadUrl("javascript:playFullscreen(" + displayMetrics.widthPixels + ", " + displayMetrics.heightPixels + ")");
     }
 
     /**
@@ -197,12 +235,17 @@ public class YoutubePlayerView extends WebView {
         @JavascriptInterface
         public void currentSeconds(String seconds) {
             if (youTubeListener != null) {
-                youTubeListener.onCurrentSecond(Double.parseDouble(seconds));
+                // currentTime callback
+                float second = Float.parseFloat(seconds);
+                Message msg = new Message();
+                msg.obj = second;
+                handler.sendMessage(msg);
             }
         }
 
         @JavascriptInterface
         public void duration(String seconds) {
+            JLog.d("duration -> " + seconds);
             if (youTubeListener != null) {
                 youTubeListener.onDuration(Double.parseDouble(seconds));
             }
@@ -215,6 +258,14 @@ public class YoutubePlayerView extends WebView {
                 youTubeListener.logs(arg);
             }
         }
+
+        private Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                float second = (float) msg.obj;
+                youTubeListener.onCurrentSecond(second);
+            }
+        };
     }
 
 
@@ -249,7 +300,7 @@ public class YoutubePlayerView extends WebView {
         protected WeakReference<Activity> activityRef;
 
         public MyWebViewClient(Activity activity) {
-            this.activityRef = new WeakReference<Activity>(activity);
+            this.activityRef = new WeakReference<>(activity);
         }
 
         @Override

@@ -97,4 +97,18 @@ public class YTParams {
         return this;
     }
 
+
+    @Override
+    public String toString() {
+        return "?autoplay=" + autoplay +
+                "&autohide=" + autohide +
+                "&rel=" + rel +
+                "&showinfo=" + showinfo +
+                "&enablejsapi=" + enablejsapi +
+                "&disablekb=" + disablekb +
+                "&cc_lang_pref=" + cc_lang_pref +
+                "&controls=" + controls +
+                "&volume=" + volume +
+                "&playbackQuality=" + playbackQuality.name();
+    }
 }
