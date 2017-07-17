@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // youtubePlayerView.initializeWithCustomURL("p1Zt47V3pPw" or "http://jaedong.net/youtube/p1Zt47V3pPw", params, new YoutubePlayerView.YouTubeListener())
 
         // initialize YoutubePlayerCallBackListener and VideoID
-        youtubePlayerView.initialize("p1Zt47V3pPw", params, new YoutubePlayerView.YouTubeListener() {
+        youtubePlayerView.initialize("dxWvtMOGAhw", params, new YoutubePlayerView.YouTubeListener() {
 
             @Override
             public void onReady() {
@@ -131,5 +131,12 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         // this is optional but you need.
         youtubePlayerView.destroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // pause video when on the background mode.
+        youtubePlayerView.pause();
     }
 }

@@ -18,7 +18,7 @@ use Gradle:
 }
 
 dependencies {
-  compile 'com.jaedongchicken:ytplayer:1.3.0'
+  compile 'com.jaedongchicken:ytplayer:1.4.0'
 }
 ```
 
@@ -28,7 +28,7 @@ Or Maven:
 <dependency>
   <groupId>com.jaedongchicken</groupId>
   <artifactId>ytplayer</artifactId>
-  <version>1.3.0</version>
+  <version>1.4.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -66,6 +66,10 @@ Simple use cases will look something like this:
          // initialize YoutubePlayerCallBackListener with Params and VideoID
         // youtubePlayerView.initialize("WCchr07kLPE", params, new YoutubePlayerView.YouTubeListener())
 
+		// initialize YoutubePlayerCallBackListener with Params and Full Video URL
+        // To Use - avoid UMG block!!!! but you'd better make own your server for your real service.
+        // youtubePlayerView.initializeWithCustomURL("p1Zt47V3pPw" or "http://jaedong.net/youtube/p1Zt47V3pPw", params, new YoutubePlayerView.YouTubeListener())
+        
 
        // make auto height of youtube. if you want to use 'wrap_content'
         youtubePlayerView.setAutoPlayerHeight(this);
@@ -124,12 +128,29 @@ Simple use cases will look something like this:
         youtubePlayerView.pause();
         // play video when it's ready
         youtubePlayerView.play();
+        
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // pause video when on the background mode.
+        youtubePlayerView.pause();
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // this is optional but you need.
+        youtubePlayerView.destroy();
+    }
+    
 ```
 
 
 Updated
 ------
 ```
+v 1.4.0 - Solved UMG block issues.
 v 1.3.0 - added AudioVolume, VideoQualoty in YTParams class.
 v 1.2.0 - added YTParams class, many youtube functions defined.
 v 1.1.0 - added setWhiteBackgroundColor() method.
