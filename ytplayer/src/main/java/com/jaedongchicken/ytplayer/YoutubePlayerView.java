@@ -39,6 +39,7 @@ public class YoutubePlayerView extends WebView {
     private Context context;
 
     private boolean isCustomDomain = false;
+    private boolean isHandlerEnable = true;
 
     public YoutubePlayerView(Context context) {
         super(context);
@@ -118,6 +119,10 @@ public class YoutubePlayerView extends WebView {
 
     public void setWhiteBackgroundColor() {
         backgroundColor = "#ffffff";
+    }
+
+    public void setHandlerDisable() {
+        isHandlerEnable = false;
     }
 
     public void setAutoPlayerHeight(Context context) {
@@ -237,9 +242,13 @@ public class YoutubePlayerView extends WebView {
             if (youTubeListener != null) {
                 // currentTime callback
                 float second = Float.parseFloat(seconds);
-                Message msg = new Message();
-                msg.obj = second;
-                handler.sendMessage(msg);
+                if (isHandlerEnable) {
+                    Message msg = new Message();
+                    msg.obj = second;
+                    handler.sendMessage(msg);
+                } else {
+                    youTubeListener.onCurrentSecond(second);
+                }
             }
         }
 
@@ -263,7 +272,9 @@ public class YoutubePlayerView extends WebView {
             @Override
             public void handleMessage(Message msg) {
                 float second = (float) msg.obj;
-                youTubeListener.onCurrentSecond(second);
+                if (youTubeListener != null) {
+                    youTubeListener.onCurrentSecond(second);
+                }
             }
         };
     }

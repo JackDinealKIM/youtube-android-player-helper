@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         // youtubePlayerView.initializeWithCustomURL("p1Zt47V3pPw" or "http://jaedong.net/youtube/p1Zt47V3pPw", params, new YoutubePlayerView.YouTubeListener())
 
         // initialize YoutubePlayerCallBackListener and VideoID
+        // youtubePlayerView.initializeWithCustomURL("http://api-superfan.qualson.com/youtube/p1Zt47V3pPw", params, new YoutubePlayerView.YouTubeListener() {
+
+        // Have to use old version user, if you have already set own your handler.
+        // youtubePlayerView.setHandlerDisable();
+
         youtubePlayerView.initialize("PFA-RmV_wG0", params, new YoutubePlayerView.YouTubeListener() {
 
             @Override

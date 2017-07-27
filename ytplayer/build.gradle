@@ -37,7 +37,7 @@ publish {
     userOrg = 'mashiaro'
     groupId = 'com.jaedongchicken'
     artifactId = 'ytplayer'
-    publishVersion = '1.4.1'
+    publishVersion = '1.4.2'
     desc = 'Helper library for Android developers looking to add YouTube video playback in their applications via the iframe player in WebView'
     website = 'https://github.com/JackDinealKIM/youtube-android-player-helper'
 }

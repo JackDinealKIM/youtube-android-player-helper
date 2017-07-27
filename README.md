@@ -18,7 +18,7 @@ use Gradle:
 }
 
 dependencies {
-  compile 'com.jaedongchicken:ytplayer:1.4.1'
+  compile 'com.jaedongchicken:ytplayer:1.4.2'
 }
 ```
 
@@ -28,7 +28,7 @@ Or Maven:
 <dependency>
   <groupId>com.jaedongchicken</groupId>
   <artifactId>ytplayer</artifactId>
-  <version>1.4.1</version>
+  <version>1.4.2</version>
   <type>pom</type>
 </dependency>
 ```
@@ -150,6 +150,7 @@ Simple use cases will look something like this:
 Updated
 ------
 ```
+v 1.4.2 - fix handler issue.
 v 1.4.1 - Solved UMG block issues.
 v 1.3.0 - added AudioVolume, VideoQualoty in YTParams class.
 v 1.2.0 - added YTParams class, many youtube functions defined.
