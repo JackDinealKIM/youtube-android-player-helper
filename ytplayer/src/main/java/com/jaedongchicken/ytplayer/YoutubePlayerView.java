@@ -72,6 +72,7 @@ public class YoutubePlayerView extends WebView {
         this.addJavascriptInterface(bridge, "QualsonInterface");
         this.setLongClickable(true);
         this.setWebChromeClient(new WebChromeClient());
+        this.setWebViewClient(new QWebViewClient());
         this.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
