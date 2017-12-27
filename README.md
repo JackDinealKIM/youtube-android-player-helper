@@ -18,7 +18,7 @@ use Gradle:
 }
 
 dependencies {
-  compile 'com.jaedongchicken:ytplayer:1.4.3'
+  compile 'com.jaedongchicken:ytplayer:1.4.4'
 }
 ```
 
@@ -28,7 +28,7 @@ Or Maven:
 <dependency>
   <groupId>com.jaedongchicken</groupId>
   <artifactId>ytplayer</artifactId>
-  <version>1.4.3</version>
+  <version>1.4.4</version>
   <type>pom</type>
 </dependency>
 ```
@@ -150,6 +150,7 @@ Simple use cases will look something like this:
 Updated
 ------
 ```
+V 1.4.4 - Open Player when you click the logo.
 V 1.4.3 - Fixed player is not to redirect.
 v 1.4.2 - fix handler.
 v 1.4.1 - Solved UMG block.
